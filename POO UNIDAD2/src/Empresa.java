@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Empresa
 {
@@ -7,10 +8,13 @@ public class Empresa
     private String direccion;
     private Departamento[] departamentos;
     private ArrayList<Trabajador> listaDeTrabajadores;
+    private Scanner scan;
 
     //CONSTRUCTOR
     public Empresa()
     {
+        scan = new Scanner(System.in);
+
         nombre = "";
         direccion = "";
         departamentos = new Departamento[2];
