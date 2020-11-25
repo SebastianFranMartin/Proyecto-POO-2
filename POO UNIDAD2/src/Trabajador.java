@@ -15,6 +15,15 @@ public class Trabajador {
         this.juego="";
         this.actividadActual="nada";
     }
+
+    public Trabajador(String rut, String nombre, int sueldo, String juego){
+
+        this.rut = rut;
+        this.nombre = nombre;
+        this.sueldo = sueldo;
+        this.juego = juego;
+        this.actividadActual="nada";
+    }
     //SELECTORES
     public String getRut() {
         return rut;
