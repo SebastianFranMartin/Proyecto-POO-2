@@ -1,2 +1,6 @@
-public class Publicista {
+public class Publicista extends Trabajador{
+
+    public Publicista(){
+    }
+
 }

@@ -1,2 +1,2 @@
-public class Desarrollador {
+public class Desarrollador extends Trabajador{
 }
