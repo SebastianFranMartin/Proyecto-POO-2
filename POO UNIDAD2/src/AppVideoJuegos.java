@@ -4,12 +4,12 @@ public class AppVideoJuegos
 {
     private static Scanner scan;
 
-    public static void main(String[] ags)
-    {
+    public static void main(String[] ags) {
         Empresa emp = new Empresa();
         Scanner scan = new Scanner(System.in);
         boolean enUso = true;
 
+        System.out.println("Hola mundo");
         do
         {
             System.out.println("///// MENÚ DE OPERACIONES /////");
