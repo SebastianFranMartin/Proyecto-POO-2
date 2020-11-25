@@ -28,7 +28,7 @@ public class AppVideoJuegos
                 case "1": emp.crearTrabajador();
                           break;
 
-                case "2":
+                case "2": emp.buscarTrabajador();
                           break;
 
                 case "3":

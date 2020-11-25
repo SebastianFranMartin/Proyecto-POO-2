@@ -59,7 +59,32 @@ public class Empresa
 
     public void buscarTrabajador()
     {
+        int valorError=0;
+        System.out.println("Ingrese el rut del trabajador a buscar:");
+        String buscarRut= scan.nextLine();
 
+        for(int x=0;x< listaDeTrabajadores.size() ;x++)
+        {
+            if(getListaDeTrabajadores().get(x).rut.equals(buscarRut))
+            {
+                System.out.println("//////////////////////////////////////////////////////////////");
+                System.out.println("Nombre: "+getListaDeTrabajadores().get(x).nombre);
+                System.out.println("Rut: "+getListaDeTrabajadores().get(x).rut);
+                System.out.println("Sueldo: "+ getListaDeTrabajadores().get(x).sueldo);
+                System.out.println("Juego en el que trabaja: "+getListaDeTrabajadores().get(x).juego);
+                System.out.println("Actividad actual:"+getListaDeTrabajadores().get(x).actividadActual);
+                System.out.println("//////////////////////////////////////////////////////////////"+"\n");
+                x= listaDeTrabajadores.size();
+            }
+            else if(valorError == listaDeTrabajadores.size())
+            {
+                System.out.println("No se ha encontrado a ningún trabajador que posea ese rut, intentelo nuevamente");
+            }
+            else{
+                valorError+=1;
+            }
+        }
+        scan.nextLine();
     }
 
     public void aumentarSueldo()
