@@ -59,32 +59,42 @@ public class Empresa
 
     public void buscarTrabajador()
     {
-        int valorError=0;
-        System.out.println("Ingrese el rut del trabajador a buscar:");
-        String buscarRut= scan.nextLine();
+        int detener=1;
+        do {
+            int valorError = 1;
+            System.out.println("Ingrese el rut del trabajador a buscar:");
+            String buscarRut = scan.nextLine();
 
-        for(int x=0;x< listaDeTrabajadores.size() ;x++)
-        {
-            if(getListaDeTrabajadores().get(x).rut.equals(buscarRut))
-            {
-                System.out.println("//////////////////////////////////////////////////////////////");
-                System.out.println("Nombre: "+getListaDeTrabajadores().get(x).nombre);
-                System.out.println("Rut: "+getListaDeTrabajadores().get(x).rut);
-                System.out.println("Sueldo: "+ getListaDeTrabajadores().get(x).sueldo);
-                System.out.println("Juego en el que trabaja: "+getListaDeTrabajadores().get(x).juego);
-                System.out.println("Actividad actual:"+getListaDeTrabajadores().get(x).actividadActual);
-                System.out.println("//////////////////////////////////////////////////////////////"+"\n");
-                x= listaDeTrabajadores.size();
+            for (int x = 0; x < listaDeTrabajadores.size(); x++) {
+                if (getListaDeTrabajadores().get(x).rut.equals(buscarRut)) {
+                    System.out.println("//////////////////////////////////////////////////////////////");
+                    System.out.println("Nombre: " + getListaDeTrabajadores().get(x).nombre);
+                    System.out.println("Rut: " + getListaDeTrabajadores().get(x).rut);
+                    System.out.println("Sueldo: " + getListaDeTrabajadores().get(x).sueldo);
+                    System.out.println("Juego en el que trabaja: " + getListaDeTrabajadores().get(x).juego);
+                    System.out.println("Actividad actual:" + getListaDeTrabajadores().get(x).actividadActual);
+                    System.out.println("//////////////////////////////////////////////////////////////" + "\n");
+                    x = listaDeTrabajadores.size();
+                } else if (valorError >= listaDeTrabajadores.size()) {
+                    System.out.println("El rut del trabajador ingresado no existe\n");
+                } else {
+                    valorError += 1;
+                    //System.out.println("el valor de error es:"+valorError);
+                    //System.out.println("el valor de largo es: "+listaDeTrabajadores.size());
+                }
             }
-            else if(valorError == listaDeTrabajadores.size())
-            {
-                System.out.println("No se ha encontrado a ningún trabajador que posea ese rut, intentelo nuevamente");
-            }
-            else{
-                valorError+=1;
-            }
-        }
-        scan.nextLine();
+
+            do {
+                System.out.println("¿Desea buscar a otro trabajador? \n 1) Sí\n 2) No\n Ingrese el número de la opción a realizar");
+                detener = scan.nextInt();
+                if(detener!=1 && detener!=2){
+                    System.out.println("INGRESE UNO DE LOS NUMEROS MOSTRADOS ANTERIORMENTE");
+                }
+            }while(detener!=1 && detener!=2);
+
+            scan.nextLine(); //limpiar barra
+        }while(detener !=2);
+
     }
 
     public void aumentarSueldo()
