@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -97,9 +98,50 @@ public class Empresa
 
     }
 
-    public void aumentarSueldo()
-    {
+    public void aumentarSueldo() {
+        int detener=1;
+        do{
+            int valorError = 1;
+            int porcentajeAumento,sueldoFinal;
+            float aumentoAgregar;
+            System.out.println("Ingrese el rut del trabajador al que le aumentará el sueldo (Recuerde que no puede ser más de un 35%):");
+            String buscarRut = scan.nextLine();
 
+            for (int x = 0; x < listaDeTrabajadores.size(); x++) {
+                if (getListaDeTrabajadores().get(x).rut.equals(buscarRut)) {
+                    System.out.println("El sueldo de "+getListaDeTrabajadores().get(x).nombre+" es: "+ getListaDeTrabajadores().get(x).sueldo);
+                    do {
+                        System.out.println("¿Cuando porciento desea aumentar el sueldo de este trabajador?");
+                        porcentajeAumento = scan.nextInt();
+                        if(porcentajeAumento>35 || porcentajeAumento<1){
+                            System.out.println("INGRESE UN PORCENTAJE MENOR A 36% O MAYOR A 0%");
+                        }
+                    }while(porcentajeAumento>35 || porcentajeAumento<1);
+                    aumentoAgregar= porcentajeAumento * getListaDeTrabajadores().get(x).sueldo /100;
+                    sueldoFinal= (int) (getListaDeTrabajadores().get(x).sueldo + aumentoAgregar);
+                     listaDeTrabajadores.get(x).sueldo = sueldoFinal;
+                    //listaDeTrabajadores.set(sueldoFinal,listaDeTrabajadores.get(x));
+                    System.out.println("Sueldo de "+getListaDeTrabajadores().get(x).nombre+" ha aumentado en un "+ porcentajeAumento +"% \n" +
+                            "Ahora su nuevo sueldo es: "+getListaDeTrabajadores().get(x).sueldo+"\n");
+
+                    //VALOR PARA TERMINAR EL FOR PORQUE YA SE ENCONTRÓ A LA PERSONA
+                    x = listaDeTrabajadores.size();
+                } else if (valorError >= listaDeTrabajadores.size()) {
+                    System.out.println("El rut del trabajador ingresado no existe\n");
+                } else {
+                    valorError += 1;
+                }
+            }
+            do {
+                System.out.println("¿Desea aumentar el sueldo a otro trabajador? \n 1) Sí\n 2) No\n Ingrese el número de la opción a realizar");
+                detener = scan.nextInt();
+                if(detener!=1 && detener!=2){
+                    System.out.println("INGRESE UNO DE LOS NUMEROS MOSTRADOS ANTERIORMENTE");
+                }
+            }while(detener!=1 && detener!=2);
+
+            scan.nextLine(); //limpiar barra
+        }while(detener !=2);
     }
 
     public void cambiarSueldo()
@@ -109,7 +151,23 @@ public class Empresa
 
     public void verTrabajadores()
     {
-
+        byte detener=1;
+        System.out.println("A continuación verás a todos los trabajadores:");
+        System.out.println("---------------------------------------------------------------");
+        do {
+            for (int x = 0; x < listaDeTrabajadores.size(); x++) {
+                System.out.println("Nombre: " + getListaDeTrabajadores().get(x).nombre +
+                        "   Rut: " + getListaDeTrabajadores().get(x).rut);
+                System.out.println("---------------------------------------------------------------");
+            }
+            do{
+                System.out.println("¿Que desea hacer?\n 1) Imprimir a los trabajadores de nuevo\n 2) Volver al menú de operaciones\nEscriba el número de la operación que desea realizar");
+                detener= scan.nextByte();
+                if(detener!=1 && detener!=2){
+                    System.out.println("ESCRIBA UNO DE LOS DOS NUMEROS DE LAS OPERACIONES ANTERIORMENTE MOSTRADAS");
+                }
+            }while(detener!=1 && detener!=2);
+        }while(detener!=2);
     }
 
     public void verActividad()

@@ -31,13 +31,13 @@ public class AppVideoJuegos
                 case "2": emp.buscarTrabajador();
                           break;
 
-                case "3":
+                case "3": emp.aumentarSueldo();
                           break;
 
                 case "4":
                           break;
 
-                case "5":
+                case "5": emp.verTrabajadores();
                           break;
 
                 case "6":
