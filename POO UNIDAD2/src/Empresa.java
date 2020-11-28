@@ -106,9 +106,12 @@ public class Empresa
             float aumentoAgregar;
             System.out.println("Ingrese el rut del trabajador al que le aumentará el sueldo (Recuerde que no puede ser más de un 35%):");
             String buscarRut = scan.nextLine();
+                Trabajador t;
 
             for (int x = 0; x < listaDeTrabajadores.size(); x++) {
                 if (getListaDeTrabajadores().get(x).rut.equals(buscarRut)) {
+                        t = listaDeTrabajadores.get(x);
+
                     System.out.println("El sueldo de "+getListaDeTrabajadores().get(x).nombre+" es: "+ getListaDeTrabajadores().get(x).sueldo);
                     do {
                         System.out.println("¿Cuando porciento desea aumentar el sueldo de este trabajador?");
@@ -119,8 +122,8 @@ public class Empresa
                     }while(porcentajeAumento>35 || porcentajeAumento<1);
                     aumentoAgregar= porcentajeAumento * getListaDeTrabajadores().get(x).sueldo /100;
                     sueldoFinal= (int) (getListaDeTrabajadores().get(x).sueldo + aumentoAgregar);
-                     listaDeTrabajadores.get(x).sueldo = sueldoFinal;
-                    //listaDeTrabajadores.set(sueldoFinal,listaDeTrabajadores.get(x));
+                        t.sueldo = sueldoFinal;
+                        listaDeTrabajadores.set(x, t);
                     System.out.println("Sueldo de "+getListaDeTrabajadores().get(x).nombre+" ha aumentado en un "+ porcentajeAumento +"% \n" +
                             "Ahora su nuevo sueldo es: "+getListaDeTrabajadores().get(x).sueldo+"\n");
 
