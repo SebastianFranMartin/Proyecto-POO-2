@@ -60,9 +60,9 @@ public class Empresa
 
     public void buscarTrabajador()
     {
-        int detener=1;
+        String detener = "1";
+        int valorError = 1;
         do {
-            int valorError = 1;
             System.out.println("Ingrese el rut del trabajador a buscar:");
             String buscarRut = scan.nextLine();
 
@@ -87,30 +87,31 @@ public class Empresa
 
             do {
                 System.out.println("¿Desea buscar a otro trabajador? \n 1) Sí\n 2) No\n Ingrese el número de la opción a realizar");
-                detener = scan.nextInt();
-                if(detener!=1 && detener!=2){
+                detener = scan.nextLine();
+                if(!detener.equals("1") && !detener.equals("2")){
                     System.out.println("INGRESE UNO DE LOS NUMEROS MOSTRADOS ANTERIORMENTE");
                 }
-            }while(detener!=1 && detener!=2);
+            }while(!detener.equals("1") && !detener.equals("2"));
 
-            scan.nextLine(); //limpiar barra
-        }while(detener !=2);
+            //scan.nextLine(); //limpiar barra
+        }while(!detener.equals("2"));
 
     }
 
     public void aumentarSueldo() {
-        int detener=1;
+        String detener="1";
+        int valorError = 1;
+        int porcentajeAumento,sueldoFinal;
+        float aumentoAgregar;
         do{
-            int valorError = 1;
-            int porcentajeAumento,sueldoFinal;
-            float aumentoAgregar;
+            valorError = 1;
             System.out.println("Ingrese el rut del trabajador al que le aumentará el sueldo (Recuerde que no puede ser más de un 35%):");
             String buscarRut = scan.nextLine();
-                Trabajador t;
+                Trabajador t; //trabajador auxiliar que obtendrá todos los valores del trabajador seleccionado
 
             for (int x = 0; x < listaDeTrabajadores.size(); x++) {
                 if (getListaDeTrabajadores().get(x).rut.equals(buscarRut)) {
-                        t = listaDeTrabajadores.get(x);
+                        t = listaDeTrabajadores.get(x); //trabajador auxiliar obtiene todos los datos del trabajador seleccionado
 
                     System.out.println("El sueldo de "+getListaDeTrabajadores().get(x).nombre+" es: "+ getListaDeTrabajadores().get(x).sueldo);
                     do {
@@ -122,8 +123,8 @@ public class Empresa
                     }while(porcentajeAumento>35 || porcentajeAumento<1);
                     aumentoAgregar= porcentajeAumento * getListaDeTrabajadores().get(x).sueldo /100;
                     sueldoFinal= (int) (getListaDeTrabajadores().get(x).sueldo + aumentoAgregar);
-                        t.sueldo = sueldoFinal;
-                        listaDeTrabajadores.set(x, t);
+                        t.sueldo = sueldoFinal; //el trabajador auxiliar obtiene el aumento de sueldo
+                        listaDeTrabajadores.set(x, t); //el trabajador auxiliar con el sueldo aumentado reemplaza al trabajador original
                     System.out.println("Sueldo de "+getListaDeTrabajadores().get(x).nombre+" ha aumentado en un "+ porcentajeAumento +"% \n" +
                             "Ahora su nuevo sueldo es: "+getListaDeTrabajadores().get(x).sueldo+"\n");
 
@@ -137,14 +138,13 @@ public class Empresa
             }
             do {
                 System.out.println("¿Desea aumentar el sueldo a otro trabajador? \n 1) Sí\n 2) No\n Ingrese el número de la opción a realizar");
-                detener = scan.nextInt();
-                if(detener!=1 && detener!=2){
+                detener = scan.nextLine();
+                if(!detener.equals("1") && !detener.equals("2")){
                     System.out.println("INGRESE UNO DE LOS NUMEROS MOSTRADOS ANTERIORMENTE");
                 }
-            }while(detener!=1 && detener!=2);
-
-            scan.nextLine(); //limpiar barra
-        }while(detener !=2);
+            }while(!detener.equals("1") && !detener.equals("2"));
+            
+        }while(!detener.equals("2"));
     }
 
     public void cambiarSueldo()
@@ -154,7 +154,7 @@ public class Empresa
 
     public void verTrabajadores()
     {
-        byte detener=1;
+        String detener="1";
         System.out.println("A continuación verás a todos los trabajadores:");
         System.out.println("---------------------------------------------------------------");
         do {
@@ -165,12 +165,12 @@ public class Empresa
             }
             do{
                 System.out.println("¿Que desea hacer?\n 1) Imprimir a los trabajadores de nuevo\n 2) Volver al menú de operaciones\nEscriba el número de la operación que desea realizar");
-                detener= scan.nextByte();
-                if(detener!=1 && detener!=2){
+                detener= scan.nextLine();
+                if(!detener.equals("1") && !detener.equals("2")){
                     System.out.println("ESCRIBA UNO DE LOS DOS NUMEROS DE LAS OPERACIONES ANTERIORMENTE MOSTRADAS");
                 }
-            }while(detener!=1 && detener!=2);
-        }while(detener!=2);
+            }while(!detener.equals("1") && !detener.equals("2"));
+        }while(!detener.equals("2"));
     }
 
     public void verActividad()
