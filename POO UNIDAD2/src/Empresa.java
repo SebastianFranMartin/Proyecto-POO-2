@@ -123,6 +123,7 @@ public class Empresa
                           }
                           listaDeTrabajadores.add(trabajador);
                           System.out.println("SE AÑADIÓ AL TRABAJADOR EXITOSAMENTE");
+                          break;
 
                 case "2": System.out.println("No se pudo añadir al trabajador.");
                           break;
@@ -255,13 +256,22 @@ public class Empresa
 
             for(short i = 0;i<entrada.length();i++)
             {
-                if(Character.isDigit(entrada.charAt(i)))
+                if(!Character.isDigit(entrada.charAt(i)))
                 {
                     validez = false;
+                    System.out.println(mensajeDeError);
                     break;
                 }
             }
 
+            if(validez)
+            {
+                if(Integer.parseInt(entrada) > 500000  ||  Integer.parseInt(entrada) < 200000)
+                {
+                    validez = false;
+                    System.out.println(mensajeDeError);
+                }
+            }
         }while(!validez);
 
         sueldo = Integer.parseInt(entrada);
