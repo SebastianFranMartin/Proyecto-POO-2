@@ -5,6 +5,7 @@ public class Trabajador {
     protected int sueldo;
     protected String juego;
     protected String actividadActual;
+    protected Departamento departamento;
 
     //CONSTRUCTOR
     public Trabajador(){
@@ -16,13 +17,14 @@ public class Trabajador {
         this.actividadActual="nada";
     }
 
-    public Trabajador(String rut, String nombre, int sueldo, String juego){
+    public Trabajador(String rut, String nombre, int sueldo, String juego, Departamento departamento){
 
         this.rut = rut;
         this.nombre = nombre;
         this.sueldo = sueldo;
         this.juego = juego;
         this.actividadActual="nada";
+        this.departamento = departamento;
     }
     //SELECTORES
     public String getRut() {
