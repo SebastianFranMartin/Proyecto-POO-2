@@ -4,12 +4,12 @@ public class AppVideoJuegos
 {
     private static Scanner scan;
 
-    public static void main(String[] ags)
-    {
+    public static void main(String[] ags) {
         Empresa emp = new Empresa();
         Scanner scan = new Scanner(System.in);
         boolean enUso = true;
 
+        System.out.println("Hola mundo");
         do
         {
             System.out.println("///// MENÚ DE OPERACIONES /////");
@@ -28,16 +28,16 @@ public class AppVideoJuegos
                 case "1": emp.crearTrabajador();
                           break;
 
-                case "2":
+                case "2": emp.buscarTrabajador();
                           break;
 
-                case "3":
+                case "3": emp.aumentarSueldo();
                           break;
 
                 case "4":
                           break;
 
-                case "5":
+                case "5": emp.verTrabajadores();
                           break;
 
                 case "6":
