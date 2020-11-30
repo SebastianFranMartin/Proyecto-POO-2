@@ -1,9 +1,9 @@
 public class Departamento {
     private String nombre;
-    private Short numOficina;
+    private short numOficina;
     private String descripcion;
 
-    public Departamento(String nombre, Short numOficina, String descripcion){
+    public Departamento(String nombre, short numOficina, String descripcion){
         this.nombre=nombre;
         this.numOficina=numOficina;
         this.descripcion=descripcion;
@@ -13,7 +13,7 @@ public class Departamento {
     public String getNombre() {
         return nombre;
     }
-    public Short getNumOficina() {
+    public short getNumOficina() {
         return numOficina;
     }
     public String getDescripcion() {
@@ -23,7 +23,7 @@ public class Departamento {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public void setNumOficina(Short numOficina) {
+    public void setNumOficina(short numOficina) {
         this.numOficina = numOficina;
     }
     public void setDescripcion(String descripcion) {
