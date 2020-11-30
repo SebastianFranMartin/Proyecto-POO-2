@@ -432,7 +432,63 @@ public class Empresa
 
     public void cambiarSueldo()
     {
+        Trabajador trabajador = null;
+        int sueldo;
+        String entrada;
+        boolean validez;
+        String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
+        short index = 0;
 
+        do
+        {
+            validez = true;
+
+            System.out.println("Ingrese el rut del trabajador al que le cambiará el sueldo");
+            entrada = scan.nextLine();
+
+            for(short i = 0;i<listaDeTrabajadores.size();i++)
+            {
+                if(listaDeTrabajadores.get(i).getRut().equals(entrada))
+                {
+                    trabajador = listaDeTrabajadores.get(i);
+                    index = i;
+                    break;
+                }
+                if(i == listaDeTrabajadores.size() - 1)
+                {
+                    validez = false;
+                }
+            }
+        }while(!validez);
+
+        System.out.println("El sueldo actual de " + trabajador.getNombre() + " es: $" + trabajador.getSueldo());
+        System.out.print("Ingrese el nuevo ");
+        sueldo = verificarSueldo();
+
+        do
+        {
+            validez = true;
+
+            System.out.println("El sueldo de " + trabajador.getNombre() + " cambiará de $" + trabajador.getSueldo() + " a $" + sueldo + ".");
+            System.out.println("¿Continuar?");
+            System.out.println("1. Sí");
+            System.out.println("2. No");
+            entrada = scan.nextLine();
+
+            switch(entrada)
+            {
+                case "1": trabajador.setSueldo(sueldo);
+                          listaDeTrabajadores.set(index, trabajador);
+                          System.out.println("LA OPERACIÓN SE HA REALIZADO CON ÉXITO.");
+                          break;
+
+                case "2": System.out.println("OPERACIÓN CANCELADA.");
+                          break;
+
+                default: validez = false;
+                         System.out.println(mensajeDeError);
+            }
+        }while(!validez);
     }
 
     public void verTrabajadores()

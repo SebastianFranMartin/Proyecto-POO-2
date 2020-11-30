@@ -34,7 +34,7 @@ public class AppVideoJuegos
                 case "3": emp.aumentarSueldo();
                           break;
 
-                case "4":
+                case "4": emp.cambiarSueldo();
                           break;
 
                 case "5": emp.verTrabajadores();
