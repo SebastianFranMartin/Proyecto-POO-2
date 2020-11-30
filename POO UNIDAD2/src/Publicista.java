@@ -4,6 +4,6 @@ public class Publicista extends Trabajador
     {
         super(rut, nombre, sueldo, juego, departamento);
 
-        actividadActual = "Preparándose para la fecha de lanzamiento del videojuego.";
+        actividadActual = "Preparándose para la fecha de lanzamiento del videojuego."; //ACCION QUE REALIZARÁ UN PUBLICISTA
     }
 }
