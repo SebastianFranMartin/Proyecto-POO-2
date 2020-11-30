@@ -12,19 +12,21 @@ public class Empresa
     //CONSTRUCTOR
     public Empresa()
     {
-        nombre = "";
-        direccion = "";
+        nombre = "POO GAMES";
+        direccion = "Calle siemprefalsa 123";
         departamentos = new Departamento[2];
         listaDeTrabajadores = new ArrayList<Trabajador>();
 
+        //Creación de departamentos
         departamentos[0] = new Departamento("Producción", (short)4, "Encargado de la creación de videojuegos como tal.");
         departamentos[1] = new Departamento("Publicidad y Marketing", (short)3, "Encargado de la promoción de los juegos de la empresa.");
 
-        listaDeTrabajadores.add(new Desarrollador("17.392.221-0", "Antonio",   250000, "Juego 1", departamentos[0]));
-        listaDeTrabajadores.add(new Desarrollador("16.992.409-2", "Camila",    300000, "Juego 2", departamentos[0]));
-        listaDeTrabajadores.add(new Diseniador("15.398.923-7", "Horacio",   350000, "Juego 1", departamentos[0]));
-        listaDeTrabajadores.add(new Publicista("14.419.656-K", "Esmeralda", 400000, "Juego 2", departamentos[1]));
-        listaDeTrabajadores.add(new Publicista("13.033.461-1", "Waldo",     450000, "Juego 1", departamentos[1]));
+        //Creación de trabajadores
+        listaDeTrabajadores.add(new Desarrollador   ("17.392.221-0", "Antonio",   250000, "Juego 1", departamentos[0]));
+        listaDeTrabajadores.add(new Desarrollador   ("16.992.409-2", "Camila",    300000, "Juego 2", departamentos[0]));
+        listaDeTrabajadores.add(new Diseniador      ("15.398.923-7", "Horacio",   350000, "Juego 1", departamentos[0]));
+        listaDeTrabajadores.add(new Publicista      ("14.419.656-K", "Esmeralda", 400000, "Juego 2", departamentos[1]));
+        listaDeTrabajadores.add(new Publicista      ("13.033.461-1", "Waldo",     450000, "Juego 1", departamentos[1]));
     }
 
     //GETTERS
@@ -42,10 +44,12 @@ public class Empresa
     //MÉTODOS GENERALES
     Scanner scan = new Scanner(System.in);
 
+    //Solicita los datos del nuevo trabajador y lo añade a la lista según el oficio especificado.
     public void crearTrabajador()
     {
+        Trabajador trabajador; //Modelo
 
-        Trabajador trabajador;
+        //Atributos
         String rut;
         String nombre;
         int sueldo;
@@ -53,24 +57,32 @@ public class Empresa
         Departamento departamento;
         byte oficio; String oficioStr;
 
+        //Validación
         String entrada;
         boolean validez;
         String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
 
+
         System.out.println("Ingrese los datos del nuevo trabajador.");
 
+        //RUT
         rut = verificarRut();
 
+        //Nombre
         System.out.println("Nombre:");
         nombre = scan.nextLine();
 
+        //Sueldo
         sueldo = verificarSueldo();
 
+        //Juego
         System.out.println("Juego en que trabaja:");
         juego = scan.nextLine();
 
+        //Departamento
         departamento = verificarDepartamento();
 
+        //Oficio, o clase hija con que se inicializará el nuevo trabajador.
         oficio = verificarOficio();
 
         switch(oficio)
@@ -84,6 +96,7 @@ public class Empresa
             default: oficioStr = "Publicista";
         }
 
+        //Impresión de datos ingresados
         System.out.println(nombre);
         System.out.println(rut);
         System.out.println("Sueldo: $" + sueldo);
@@ -91,6 +104,7 @@ public class Empresa
         System.out.println("Departamento de " + departamento.getNombre());
         System.out.println(oficioStr);
 
+        //Solicitar confirmación
         do
         {
             validez = true;
@@ -102,23 +116,30 @@ public class Empresa
 
             switch(entrada)
             {
+                //Sí
                 case "1": switch(oficio)
                           {
+                              //Se crea un desarrollador
                               case 1: trabajador = new Desarrollador(rut, nombre, sueldo, juego, departamento);
                                       break;
 
+                              //Se crea un diseñador
                               case 2: trabajador = new Diseniador(rut, nombre, sueldo, juego, departamento);
                                       break;
 
+                              //Se crea un publicista
                               default: trabajador = new Publicista(rut, nombre, sueldo, juego, departamento);
                           }
+                          //Se añade el trabajador a la lista.
                           listaDeTrabajadores.add(trabajador);
                           System.out.println("SE AÑADIÓ AL TRABAJADOR EXITOSAMENTE");
                           break;
 
+                //No
                 case "2": System.out.println("No se pudo añadir al trabajador.");
                           break;
 
+                //Input inválido
                 default: validez = false;
                          System.out.println(mensajeDeError);
             }
@@ -127,13 +148,15 @@ public class Empresa
         System.out.println("Presione enter para continuar");
         scan.nextLine();
     }
+    //Solicita y valida el RUT del trabajador a crear.
     public String verificarRut()
     {
-
-
-        String entrada;
+        //RUT separado por partes, según puntos.
         String rut = null, ult, penult, antepen;
         short largo;
+
+        //Validación
+        String entrada;
         boolean validez, preValidez = false;
         String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
 
@@ -148,6 +171,7 @@ public class Empresa
             entrada = scan.nextLine();
             largo = (short)entrada.length();
 
+            //No existe un RUT que se escriba en dos caracteres o menos
             if(largo < 3)
             {
                 validez = false;
@@ -155,6 +179,8 @@ public class Empresa
                 continue;
             }
 
+            //No existe un RUT de persona que, sin puntos y con guión, se escriba en más de diez caracteres. Tampoco
+            //existe un RUT de las mismas características cuyo penúltimo caracter no sea un guión.
             if(largo > 10  ||  entrada.charAt(largo - 2) != (char)45)
             {
                 validez = false;
@@ -162,22 +188,30 @@ public class Empresa
                 continue;
             }
 
-            byte inicio = (byte)(largo-1);
+            //Luego de validar la longitud de la entrada, se añaden los puntos al RUT ingresado.
+            //Se debe recorrer la entrada de atrás hacia adelante.
+            byte inicio = (byte)(largo-1); //Último caracter
             for(byte i = inicio;i>=0;i--)
             {
+                //Tras la quinta iteración, se almacenan los últimos tres "dígitos" junto con el dígito verificador.
                 if(i == inicio - 4)
                 {
                     ult = entrada.substring(i);
                 }
+                //En la séptima iteración, se sabe que el RUT tiene seis o más dígitos, por lo que se almacena la
+                //segunda parte, seguida del punto de la unidad de mil.
                 else if(i == inicio - 7)
                 {
                     penult = entrada.substring(i, i + 3).concat(".");
                 }
             }
+            //Si el RUT tiene menos de tres dígitos, se almacena por completo en una parte.
             if(ult.isEmpty())
             {
                 ult = entrada;
             }
+            //Si no alcanza los seis dígitos, pero supera los tres, Se almacenan los dígitos centrales seguidos del
+            //punto de unidad de mil.
             else if(penult.isEmpty())
             {
                 if(inicio - 4 != 0)
@@ -185,11 +219,14 @@ public class Empresa
                     penult = entrada.substring(0, inicio - 4).concat(".");
                 }
             }
+            //Si supera los seis dígitos, almacena los millones, seguidos del punto de unidad de millón.
             else if(inicio - 7 != 0)
             {
                 antepen = entrada.substring(0, inicio - 7).concat(".");
             }
+            //Conjunción de las tres partes.
             rut = antepen.concat(penult.concat(ult));
+            //Se comprueba que el RUT ingresado no coincida con el de un trabajador ya registrado.
             for(byte i = 0;i<listaDeTrabajadores.size();i++)
             {
                 if(rut.equals(listaDeTrabajadores.get(i).getRut()))
@@ -204,17 +241,24 @@ public class Empresa
                 continue;
             }
 
+            //Por último, se comprueba que todos los caracteres ingresados, salvo el guión, sean dígitos, o K en el caso
+            //del dígito verificador.
+            //Recorre los caracteres de la entrada.
             for(byte i = 0;i<largo;i++)
             {
+                //Compara el caracter con los dígitos hasta que coincidan.
                 for(byte j = 0;j<10;j++)
                 {
                     preValidez = false;
+                    //A la primera coincidencia, se dejan de comparar con los dígitos restantes. No se analiza el guión.
                     if(entrada.charAt(i) == String.valueOf(j).charAt(0)  ||  i == (largo - 2))
                     {
                         preValidez = true;
                         break;
                     }
                 }
+                //Si un caracter no es un dígito, si no corresponde al dígito verificador siendo 'K', el RUT no es
+                //válido.
                 if(!preValidez  &&  !(i == largo - 1  &&  (entrada.charAt(i) == 'k'  ||  entrada.charAt(i) == 'K')))
                 {
                     validez = false;
@@ -226,11 +270,11 @@ public class Empresa
 
         return rut;
     }
+    //Solicita y valida el sueldo del trabajador a crear.
     public int verificarSueldo()
     {
-
-
-        int sueldo;
+        int sueldo; //Variable de retorno.
+        //Validación.
         String entrada;
         boolean validez;
         String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
@@ -241,6 +285,7 @@ public class Empresa
 
             System.out.print("Sueldo:\nMÍNIMO: 200000\nMÁXIMO: 500000\n");
             entrada = scan.nextLine();
+            //No es válido un sueldo que no contenga exactamente seis dígitos, o que comience con '0'.
             if(entrada.length() != 6  ||  entrada.charAt(0) == '0')
             {
                 validez = false;
@@ -248,6 +293,7 @@ public class Empresa
                 continue;
             }
 
+            //Se comprueba que los caracteres ingresados sean todos dígitos.
             for(short i = 0;i<entrada.length();i++)
             {
                 if(!Character.isDigit(entrada.charAt(i)))
@@ -258,8 +304,10 @@ public class Empresa
                 }
             }
 
+            //Si la entrada realmente es un número...
             if(validez)
             {
+                //...se comprueba que esté dentro del rango especificado.
                 if(Integer.parseInt(entrada) > 500000  ||  Integer.parseInt(entrada) < 200000)
                 {
                     validez = false;
@@ -272,11 +320,11 @@ public class Empresa
 
         return sueldo;
     }
+    //Solicita y valida el departamento del trabajador a crear.
     public Departamento verificarDepartamento()
     {
-
-
-        Departamento departamento = null;
+        Departamento departamento = null; //Variable de retorno.
+        //Validación.
         String entrada;
         boolean validez;
         String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
@@ -285,6 +333,7 @@ public class Empresa
         {
             validez = true;
 
+            //Se muestran los departamentos existentes, y se solicita la elección de uno.
             System.out.println("Departamento al que pertenece:");
             System.out.println("1. Producción");
             System.out.println("2. Publicidad y Marketing");
@@ -292,12 +341,14 @@ public class Empresa
 
             switch(entrada)
             {
+                //Producción
                 case "1": departamento = departamentos[0];
                           break;
 
+                //Publicidad y Marketing
                 case "2": departamento = departamentos[1];
                           break;
-
+                //Input inválido.
                 default: validez = false;
                          System.out.println(mensajeDeError);
             }
@@ -305,11 +356,11 @@ public class Empresa
 
         return departamento;
     }
+    //Solicita y valida el oficio del trabajador a crear.
     public byte verificarOficio()
     {
-
-
-        byte oficio = 0;
+        byte oficio = 0; //Variable de retorno.
+        //Validación.
         String entrada;
         boolean validez;
         String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
@@ -318,16 +369,19 @@ public class Empresa
         {
             validez = true;
 
+            //Se muestran los oficios admitidos y se solicita elegir uno.
             System.out.println("Oficio:");
             System.out.println("1. Desarrollador");
             System.out.println("2. Diseñador");
             System.out.println("3. Publicista");
             entrada = scan.nextLine();
 
+            //Input válido.
             if(entrada.equals("1")  ||  entrada.equals("2")  ||  entrada.equals("3"))
             {
                 oficio = Byte.parseByte(entrada);
             }
+            //Input inválido.
             else
             {
                 validez = false;
@@ -434,15 +488,15 @@ public class Empresa
 
     public void cambiarSueldo()
     {
-
-
-        Trabajador trabajador = null;
+        Trabajador trabajador = null; //Modelo.
         int sueldo;
+        //Validación.
         String entrada;
         boolean validez;
         String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
         short index = 0;
 
+        //Se solicita el RUT del trabajador al cual se le quiere cambiar el sueldo.
         do
         {
             validez = true;
@@ -450,14 +504,17 @@ public class Empresa
             System.out.println("Ingrese el rut del trabajador al que le cambiará el sueldo");
             entrada = scan.nextLine();
 
+            //Se comprueba que el RUT esté registrado.
             for(short i = 0;i<listaDeTrabajadores.size();i++)
             {
+                //Cuando se encuentra al trabajador, se deja de buscar.
                 if(listaDeTrabajadores.get(i).getRut().equals(entrada))
                 {
                     trabajador = listaDeTrabajadores.get(i);
                     index = i;
                     break;
                 }
+                //Si ningún RUT registrado coincide con el ingresado, no es correcta la entrada.
                 if(i == listaDeTrabajadores.size() - 1)
                 {
                     validez = false;
@@ -466,10 +523,12 @@ public class Empresa
             }
         }while(!validez);
 
+        //Se muestra el nombre y el sueldo actual del trabajador, y se solicita el ingreso de un nuevo salario.
         System.out.println("El sueldo actual de " + trabajador.getNombre() + " es: $" + trabajador.getSueldo());
         System.out.print("Ingrese el nuevo ");
-        sueldo = verificarSueldo();
+        sueldo = verificarSueldo(); //Se reutiliza el método para asignar un sueldo.
 
+        //Confirmación de cambios.
         do
         {
             validez = true;
@@ -521,14 +580,15 @@ public class Empresa
 
     public void verActividad()
     {
-
+        Trabajador trabajador = null; //Modelo.
+        //Validación.
         String entrada;
         boolean validez, visualizando = true;
         String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
-        Trabajador trabajador = null;
 
         do
         {
+            //Se solicita el ingreso del RUT del trabajador.
             do
             {
                 validez = true;
@@ -536,6 +596,7 @@ public class Empresa
                 System.out.println("Ingrese el rut del trabajador que desea comprobar su actividad:");
                 entrada = scan.nextLine();
 
+                //Comprueba que el RUT corresponda a un trabajador registrado.
                 for(short i = 0;i<listaDeTrabajadores.size();i++)
                 {
                     if(listaDeTrabajadores.get(i).getRut().equals(entrada))
@@ -551,8 +612,10 @@ public class Empresa
                 }
             }while(!validez);
 
+            //Impresión de la actividad.
             System.out.print("\n" + trabajador.getNombre() + " está " + trabajador.getActividadActual() + "\n\n");
 
+            //Se consulta si se desea verificar la actividad de otro trabajador.
             do
             {
                 validez = true;
@@ -573,7 +636,5 @@ public class Empresa
                 }
             }while(!validez);
         }while(visualizando);
-
-
     }
 }
