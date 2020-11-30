@@ -9,13 +9,10 @@ public class Empresa
     private String direccion;
     private Departamento[] departamentos;
     private ArrayList<Trabajador> listaDeTrabajadores;
-    private Scanner scan;
 
     //CONSTRUCTOR
     public Empresa()
     {
-        scan = new Scanner(System.in);
-
         nombre = "";
         direccion = "";
         departamentos = new Departamento[2];
@@ -24,19 +21,11 @@ public class Empresa
         departamentos[0] = new Departamento("Producción", (short)4, "Encargado de la creación de videojuegos como tal.");
         departamentos[1] = new Departamento("Publicidad y Marketing", (short)3, "Encargado de la promoción de los juegos de la empresa.");
 
-        listaDeTrabajadores.add(new Trabajador("17.392.221-0", "Antonio",   250000, "Juego 1", departamentos[0]));
-        listaDeTrabajadores.add(new Trabajador("16.992.409-2", "Camila",    300000, "Juego 2", departamentos[0]));
-        listaDeTrabajadores.add(new Trabajador("15.398.923-7", "Horacio",   350000, "Juego 1", departamentos[0]));
-        listaDeTrabajadores.add(new Trabajador("14.419.656-K", "Esmeralda", 400000, "Juego 2", departamentos[1]));
-        listaDeTrabajadores.add(new Trabajador("13.033.461-1", "Waldo",     450000, "Juego 1", departamentos[1]));
-
-            /*
-            for(byte i = 0;i<5;i++)
-            {
-                Trabajador a = listaDeTrabajadores.get(i);
-                System.out.println(a.rut + ", " + a.nombre + ", " + a.sueldo + ", " + a.juego);
-            }
-            */
+        listaDeTrabajadores.add(new Desarrollador("17.392.221-0", "Antonio",   250000, "Juego 1", departamentos[0]));
+        listaDeTrabajadores.add(new Desarrollador("16.992.409-2", "Camila",    300000, "Juego 2", departamentos[0]));
+        listaDeTrabajadores.add(new Diseniador("15.398.923-7", "Horacio",   350000, "Juego 1", departamentos[0]));
+        listaDeTrabajadores.add(new Publicista("14.419.656-K", "Esmeralda", 400000, "Juego 2", departamentos[1]));
+        listaDeTrabajadores.add(new Publicista("13.033.461-1", "Waldo",     450000, "Juego 1", departamentos[1]));
     }
 
     //GETTERS
@@ -55,6 +44,8 @@ public class Empresa
 
     public void crearTrabajador()
     {
+        Scanner scan = new Scanner(System.in);
+getClass().na
         Trabajador trabajador;
         String rut;
         String nombre;
@@ -139,6 +130,8 @@ public class Empresa
     }
     public String verificarRut()
     {
+        Scanner scan = new Scanner(System.in);
+
         String entrada;
         String rut = null, ult, penult, antepen;
         short largo;
@@ -236,6 +229,8 @@ public class Empresa
     }
     public int verificarSueldo()
     {
+        Scanner scan = new Scanner(System.in);
+
         int sueldo;
         String entrada;
         boolean validez;
@@ -280,6 +275,8 @@ public class Empresa
     }
     public Departamento verificarDepartamento()
     {
+        Scanner scan = new Scanner(System.in);
+
         Departamento departamento = null;
         String entrada;
         boolean validez;
@@ -311,6 +308,8 @@ public class Empresa
     }
     public byte verificarOficio()
     {
+        Scanner scan = new Scanner(System.in);
+
         byte oficio = 0;
         String entrada;
         boolean validez;
@@ -342,6 +341,8 @@ public class Empresa
 
     public void buscarTrabajador()
     {
+        Scanner scan = new Scanner(System.in);
+
         String detener = "1";
         int valorError = 1;
         do {
@@ -381,6 +382,8 @@ public class Empresa
     }
 
     public void aumentarSueldo() {
+        Scanner scan = new Scanner(System.in);
+
         String detener="1";
         int valorError = 1;
         int porcentajeAumento,sueldoFinal;
@@ -431,6 +434,8 @@ public class Empresa
 
     public void cambiarSueldo()
     {
+        Scanner scan = new Scanner(System.in);
+
         Trabajador trabajador = null;
         int sueldo;
         String entrada;
@@ -492,6 +497,8 @@ public class Empresa
 
     public void verTrabajadores()
     {
+        Scanner scan = new Scanner(System.in);
+
         String detener="1";
         System.out.println("A continuación verás a todos los trabajadores:");
         System.out.println("---------------------------------------------------------------");
@@ -513,6 +520,8 @@ public class Empresa
 
     public void verActividad()
     {
+        Scanner scan = new Scanner(System.in);
+
         /*Trabajador t = listaDeTrabajadores.get(5);
         System.out.println(t.getClass().getGenericSuperclass().getTypeName());
         System.out.println(t.getClass().getName());*/

@@ -2,8 +2,6 @@ import java.util.Scanner;
 
 public class AppVideoJuegos
 {
-    private static Scanner scan;
-
     public static void main(String[] ags) {
         Empresa emp = new Empresa();
         Scanner scan = new Scanner(System.in);
