@@ -45,7 +45,7 @@ public class Empresa
     public void crearTrabajador()
     {
         Scanner scan = new Scanner(System.in);
-getClass().na
+        
         Trabajador trabajador;
         String rut;
         String nombre;
