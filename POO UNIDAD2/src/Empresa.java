@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -41,11 +40,10 @@ public class Empresa
     public void setListaDeTrabajadores(ArrayList<Trabajador> listaDeTrabajadores)   {this.listaDeTrabajadores = listaDeTrabajadores;}
 
     //MÉTODOS GENERALES
+    Scanner scan = new Scanner(System.in);
 
     public void crearTrabajador()
     {
-        Scanner scan = new Scanner(System.in);
-        
         Trabajador trabajador;
         String rut;
         String nombre;
@@ -130,7 +128,7 @@ public class Empresa
     }
     public String verificarRut()
     {
-        Scanner scan = new Scanner(System.in);
+
 
         String entrada;
         String rut = null, ult, penult, antepen;
@@ -229,7 +227,7 @@ public class Empresa
     }
     public int verificarSueldo()
     {
-        Scanner scan = new Scanner(System.in);
+
 
         int sueldo;
         String entrada;
@@ -275,7 +273,7 @@ public class Empresa
     }
     public Departamento verificarDepartamento()
     {
-        Scanner scan = new Scanner(System.in);
+
 
         Departamento departamento = null;
         String entrada;
@@ -308,7 +306,7 @@ public class Empresa
     }
     public byte verificarOficio()
     {
-        Scanner scan = new Scanner(System.in);
+
 
         byte oficio = 0;
         String entrada;
@@ -341,7 +339,7 @@ public class Empresa
 
     public void buscarTrabajador()
     {
-        Scanner scan = new Scanner(System.in);
+
 
         String detener = "1";
         int valorError = 1;
@@ -383,7 +381,7 @@ public class Empresa
     }
 
     public void aumentarSueldo() {
-        Scanner scan = new Scanner(System.in);
+
 
         String detener="1";
         int valorError = 1;
@@ -435,7 +433,7 @@ public class Empresa
 
     public void cambiarSueldo()
     {
-        Scanner scan = new Scanner(System.in);
+
 
         Trabajador trabajador = null;
         int sueldo;
@@ -498,7 +496,7 @@ public class Empresa
 
     public void verTrabajadores()
     {
-        Scanner scan = new Scanner(System.in);
+
 
         String detener="1";
         System.out.println("A continuación verás a todos los trabajadores:");
@@ -521,8 +519,6 @@ public class Empresa
 
     public void verActividad()
     {
-        Scanner scan = new Scanner(System.in);
-
         /*Trabajador t = listaDeTrabajadores.get(5);
         System.out.println(t.getClass().getGenericSuperclass().getTypeName());
         System.out.println(t.getClass().getName());*/
