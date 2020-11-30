@@ -7,7 +7,6 @@ public class AppVideoJuegos
         Scanner scan = new Scanner(System.in);
         boolean enUso = true;
 
-        System.out.println("Hola mundo");
         do
         {
             System.out.println("///// MENÚ DE OPERACIONES /////");

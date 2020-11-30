@@ -8,15 +8,6 @@ public class Trabajador {
     protected Departamento departamento;
 
     //CONSTRUCTOR
-    public Trabajador(){
-
-        this.rut="";
-        this.nombre="";
-        this.sueldo=0;
-        this.juego="";
-        this.actividadActual="nada";
-    }
-
     public Trabajador(String rut, String nombre, int sueldo, String juego, Departamento departamento){
 
         this.rut = rut;
