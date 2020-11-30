@@ -356,8 +356,8 @@ public class Empresa
                     System.out.println("Rut: " + getListaDeTrabajadores().get(x).rut);
                     System.out.println("Sueldo: " + getListaDeTrabajadores().get(x).sueldo);
                     System.out.println("Juego en el que trabaja: " + getListaDeTrabajadores().get(x).juego);
-                    System.out.println("Actividad actual:" + getListaDeTrabajadores().get(x).actividadActual);
                     System.out.println("Tipo de trabajador: "+ getListaDeTrabajadores().get(x).getClass().getName());
+                    System.out.println("Actividad actual:" + getListaDeTrabajadores().get(x).actividadActual);
                     System.out.println("//////////////////////////////////////////////////////////////" + "\n");
                     x = listaDeTrabajadores.size();
                 } else if (valorError >= listaDeTrabajadores.size()) {
