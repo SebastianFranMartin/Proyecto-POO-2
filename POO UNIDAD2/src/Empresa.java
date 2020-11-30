@@ -9,13 +9,10 @@ public class Empresa
     private String direccion;
     private Departamento[] departamentos;
     private ArrayList<Trabajador> listaDeTrabajadores;
-    private Scanner scan;
 
     //CONSTRUCTOR
     public Empresa()
     {
-        scan = new Scanner(System.in);
-
         nombre = "";
         direccion = "";
         departamentos = new Departamento[2];
@@ -24,19 +21,11 @@ public class Empresa
         departamentos[0] = new Departamento("Producción", (short)4, "Encargado de la creación de videojuegos como tal.");
         departamentos[1] = new Departamento("Publicidad y Marketing", (short)3, "Encargado de la promoción de los juegos de la empresa.");
 
-        listaDeTrabajadores.add(new Trabajador("17.392.221-0", "Antonio",   250000, "Juego 1"));
-        listaDeTrabajadores.add(new Trabajador("16.992.409-2", "Camila",    300000, "Juego 2"));
-        listaDeTrabajadores.add(new Trabajador("15.398.923-7", "Horacio",   350000, "Juego 1"));
-        listaDeTrabajadores.add(new Trabajador("14.419.656-K", "Esmeralda", 400000, "Juego 2"));
-        listaDeTrabajadores.add(new Trabajador("13.033.461-1", "Waldo",     450000, "Juego 1"));
-
-            /*
-            for(byte i = 0;i<5;i++)
-            {
-                Trabajador a = listaDeTrabajadores.get(i);
-                System.out.println(a.rut + ", " + a.nombre + ", " + a.sueldo + ", " + a.juego);
-            }
-            */
+        listaDeTrabajadores.add(new Desarrollador("17.392.221-0", "Antonio",   250000, "Juego 1", departamentos[0]));
+        listaDeTrabajadores.add(new Desarrollador("16.992.409-2", "Camila",    300000, "Juego 2", departamentos[0]));
+        listaDeTrabajadores.add(new Diseniador("15.398.923-7", "Horacio",   350000, "Juego 1", departamentos[0]));
+        listaDeTrabajadores.add(new Publicista("14.419.656-K", "Esmeralda", 400000, "Juego 2", departamentos[1]));
+        listaDeTrabajadores.add(new Publicista("13.033.461-1", "Waldo",     450000, "Juego 1", departamentos[1]));
     }
 
     //GETTERS
@@ -55,11 +44,305 @@ public class Empresa
 
     public void crearTrabajador()
     {
+        Scanner scan = new Scanner(System.in);
+getClass().na
+        Trabajador trabajador;
+        String rut;
+        String nombre;
+        int sueldo;
+        String juego;
+        Departamento departamento;
+        byte oficio; String oficioStr;
 
+        String entrada;
+        boolean validez;
+        String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
+
+        System.out.println("Ingrese los datos del nuevo trabajador.");
+
+        rut = verificarRut();
+
+        System.out.println("Nombre:");
+        nombre = scan.nextLine();
+
+        sueldo = verificarSueldo();
+
+        System.out.println("Juego en que trabaja:");
+        juego = scan.nextLine();
+
+        departamento = verificarDepartamento();
+
+        oficio = verificarOficio();
+
+        switch(oficio)
+        {
+            case 1: oficioStr = "Desarrollador";
+                break;
+
+            case 2: oficioStr = "Diseñador";
+                break;
+
+            default: oficioStr = "Publicista";
+        }
+
+        System.out.println(nombre);
+        System.out.println(rut);
+        System.out.println("Sueldo: $" + sueldo);
+        System.out.println("Juego: " + juego);
+        System.out.println("Departamento de " + departamento.getNombre());
+        System.out.println(oficioStr);
+
+        do
+        {
+            validez = true;
+
+            System.out.println("¿Es correcta esta información?");
+            System.out.println("1. Sí");
+            System.out.println("2. No");
+            entrada = scan.nextLine();
+
+            switch(entrada)
+            {
+                case "1": switch(oficio)
+                          {
+                              case 1: trabajador = new Desarrollador(rut, nombre, sueldo, juego, departamento);
+                                      break;
+
+                              case 2: trabajador = new Diseniador(rut, nombre, sueldo, juego, departamento);
+                                      break;
+
+                              default: trabajador = new Publicista(rut, nombre, sueldo, juego, departamento);
+                          }
+                          listaDeTrabajadores.add(trabajador);
+                          System.out.println("SE AÑADIÓ AL TRABAJADOR EXITOSAMENTE");
+                          break;
+
+                case "2": System.out.println("No se pudo añadir al trabajador.");
+                          break;
+
+                default: validez = false;
+                         System.out.println(mensajeDeError);
+            }
+        }while(!validez);
+
+        System.out.println("Presione enter para continuar");
+        scan.nextLine();
+    }
+    public String verificarRut()
+    {
+        Scanner scan = new Scanner(System.in);
+
+        String entrada;
+        String rut = null, ult, penult, antepen;
+        short largo;
+        boolean validez, preValidez = false;
+        String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
+
+        do
+        {
+            validez = true;
+            ult = "";
+            penult = "";
+            antepen = "";
+
+            System.out.println("RUT sin puntos, con guión y dígito verificador:");
+            entrada = scan.nextLine();
+            largo = (short)entrada.length();
+
+            if(largo < 3)
+            {
+                validez = false;
+                System.out.println(mensajeDeError);
+                continue;
+            }
+
+            if(largo > 10  ||  entrada.charAt(largo - 2) != (char)45)
+            {
+                validez = false;
+                System.out.println(mensajeDeError);
+                continue;
+            }
+
+            byte inicio = (byte)(largo-1);
+            for(byte i = inicio;i>=0;i--)
+            {
+                if(i == inicio - 4)
+                {
+                    ult = entrada.substring(i);
+                }
+                else if(i == inicio - 7)
+                {
+                    penult = entrada.substring(i, i + 3).concat(".");
+                }
+            }
+            if(ult.isEmpty())
+            {
+                ult = entrada;
+            }
+            else if(penult.isEmpty())
+            {
+                if(inicio - 4 != 0)
+                {
+                    penult = entrada.substring(0, inicio - 4).concat(".");
+                }
+            }
+            else if(inicio - 7 != 0)
+            {
+                antepen = entrada.substring(0, inicio - 7).concat(".");
+            }
+            rut = antepen.concat(penult.concat(ult));
+            for(byte i = 0;i<listaDeTrabajadores.size();i++)
+            {
+                if(rut.equals(listaDeTrabajadores.get(i).getRut()))
+                {
+                    validez = false;
+                    break;
+                }
+            }
+            if(!validez)
+            {
+                System.out.println("ESTE RUT YA HA SIDO INGRESADO. Intente nuevamente.");
+                continue;
+            }
+
+            for(byte i = 0;i<largo;i++)
+            {
+                for(byte j = 0;j<10;j++)
+                {
+                    preValidez = false;
+                    if(entrada.charAt(i) == String.valueOf(j).charAt(0)  ||  i == (largo - 2))
+                    {
+                        preValidez = true;
+                        break;
+                    }
+                }
+                if(!preValidez  &&  !(i == largo - 1  &&  (entrada.charAt(i) == 'k'  ||  entrada.charAt(i) == 'K')))
+                {
+                    validez = false;
+                    System.out.println(mensajeDeError);
+                    break;
+                }
+            }
+        }while(!validez);
+
+        return rut;
+    }
+    public int verificarSueldo()
+    {
+        Scanner scan = new Scanner(System.in);
+
+        int sueldo;
+        String entrada;
+        boolean validez;
+        String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
+
+        do
+        {
+            validez = true;
+
+            System.out.print("Sueldo:\nMÍNIMO: 200000\nMÁXIMO: 500000\n");
+            entrada = scan.nextLine();
+            if(entrada.length() != 6  ||  entrada.charAt(0) == '0')
+            {
+                validez = false;
+                System.out.println(mensajeDeError);
+                continue;
+            }
+
+            for(short i = 0;i<entrada.length();i++)
+            {
+                if(!Character.isDigit(entrada.charAt(i)))
+                {
+                    validez = false;
+                    System.out.println(mensajeDeError);
+                    break;
+                }
+            }
+
+            if(validez)
+            {
+                if(Integer.parseInt(entrada) > 500000  ||  Integer.parseInt(entrada) < 200000)
+                {
+                    validez = false;
+                    System.out.println(mensajeDeError);
+                }
+            }
+        }while(!validez);
+
+        sueldo = Integer.parseInt(entrada);
+
+        return sueldo;
+    }
+    public Departamento verificarDepartamento()
+    {
+        Scanner scan = new Scanner(System.in);
+
+        Departamento departamento = null;
+        String entrada;
+        boolean validez;
+        String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
+
+        do
+        {
+            validez = true;
+
+            System.out.println("Departamento al que pertenece:");
+            System.out.println("1. Producción");
+            System.out.println("2. Publicidad y Marketing");
+            entrada = scan.nextLine();
+
+            switch(entrada)
+            {
+                case "1": departamento = departamentos[0];
+                          break;
+
+                case "2": departamento = departamentos[1];
+                          break;
+
+                default: validez = false;
+                         System.out.println(mensajeDeError);
+            }
+        }while(!validez);
+
+        return departamento;
+    }
+    public byte verificarOficio()
+    {
+        Scanner scan = new Scanner(System.in);
+
+        byte oficio = 0;
+        String entrada;
+        boolean validez;
+        String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
+
+        do
+        {
+            validez = true;
+
+            System.out.println("Oficio:");
+            System.out.println("1. Desarrollador");
+            System.out.println("2. Diseñador");
+            System.out.println("3. Publicista");
+            entrada = scan.nextLine();
+
+            if(entrada.equals("1")  ||  entrada.equals("2")  ||  entrada.equals("3"))
+            {
+                oficio = Byte.parseByte(entrada);
+            }
+            else
+            {
+                validez = false;
+                System.out.println(mensajeDeError);
+            }
+        }while(!validez);
+
+        return oficio;
     }
 
     public void buscarTrabajador()
     {
+        Scanner scan = new Scanner(System.in);
+
         String detener = "1";
         int valorError = 1;
         do {
@@ -100,6 +383,8 @@ public class Empresa
     }
 
     public void aumentarSueldo() {
+        Scanner scan = new Scanner(System.in);
+
         String detener="1";
         int valorError = 1;
         int porcentajeAumento,sueldoFinal;
@@ -150,11 +435,71 @@ public class Empresa
 
     public void cambiarSueldo()
     {
+        Scanner scan = new Scanner(System.in);
 
+        Trabajador trabajador = null;
+        int sueldo;
+        String entrada;
+        boolean validez;
+        String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
+        short index = 0;
+
+        do
+        {
+            validez = true;
+
+            System.out.println("Ingrese el rut del trabajador al que le cambiará el sueldo");
+            entrada = scan.nextLine();
+
+            for(short i = 0;i<listaDeTrabajadores.size();i++)
+            {
+                if(listaDeTrabajadores.get(i).getRut().equals(entrada))
+                {
+                    trabajador = listaDeTrabajadores.get(i);
+                    index = i;
+                    break;
+                }
+                if(i == listaDeTrabajadores.size() - 1)
+                {
+                    validez = false;
+                }
+            }
+        }while(!validez);
+
+        System.out.println("El sueldo actual de " + trabajador.getNombre() + " es: $" + trabajador.getSueldo());
+        System.out.print("Ingrese el nuevo ");
+        sueldo = verificarSueldo();
+
+        do
+        {
+            validez = true;
+
+            System.out.println("El sueldo de " + trabajador.getNombre() + " cambiará de $" + trabajador.getSueldo() + " a $" + sueldo + ".");
+            System.out.println("¿Continuar?");
+            System.out.println("1. Sí");
+            System.out.println("2. No");
+            entrada = scan.nextLine();
+
+            switch(entrada)
+            {
+                case "1": trabajador.setSueldo(sueldo);
+                          listaDeTrabajadores.set(index, trabajador);
+                          System.out.println("LA OPERACIÓN SE HA REALIZADO CON ÉXITO.");
+                          break;
+
+                case "2": System.out.println("OPERACIÓN CANCELADA.");
+                          break;
+
+                default: validez = false;
+                         System.out.println(mensajeDeError);
+            }
+        }while(!validez);
     }
 
     public void verTrabajadores()
     {
+        Scanner scan = new Scanner(System.in);
+
         String detener="1";
         System.out.println("A continuación verás a todos los trabajadores:");
         System.out.println("---------------------------------------------------------------");
@@ -176,6 +521,10 @@ public class Empresa
 
     public void verActividad()
     {
+        Scanner scan = new Scanner(System.in);
 
+        /*Trabajador t = listaDeTrabajadores.get(5);
+        System.out.println(t.getClass().getGenericSuperclass().getTypeName());
+        System.out.println(t.getClass().getName());*/
     }
 }

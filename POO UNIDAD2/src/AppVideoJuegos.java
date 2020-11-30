@@ -2,8 +2,6 @@ import java.util.Scanner;
 
 public class AppVideoJuegos
 {
-    private static Scanner scan;
-
     public static void main(String[] ags) {
         Empresa emp = new Empresa();
         Scanner scan = new Scanner(System.in);
@@ -34,13 +32,13 @@ public class AppVideoJuegos
                 case "3": emp.aumentarSueldo();
                           break;
 
-                case "4":
+                case "4": emp.cambiarSueldo();
                           break;
 
                 case "5": emp.verTrabajadores();
                           break;
 
-                case "6":
+                case "6": emp.verActividad();
                           break;
 
                 case "7": enUso = false;
