@@ -44,6 +44,7 @@ public class Empresa
 
     public void crearTrabajador()
     {
+
         Trabajador trabajador;
         String rut;
         String nombre;
@@ -460,6 +461,7 @@ public class Empresa
                 if(i == listaDeTrabajadores.size() - 1)
                 {
                     validez = false;
+                    System.out.println(mensajeDeError);
                 }
             }
         }while(!validez);
@@ -519,8 +521,34 @@ public class Empresa
 
     public void verActividad()
     {
-        /*Trabajador t = listaDeTrabajadores.get(5);
-        System.out.println(t.getClass().getGenericSuperclass().getTypeName());
-        System.out.println(t.getClass().getName());*/
+
+        String entrada;
+        boolean validez;
+        String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
+        Trabajador trabajador = null;
+
+        do
+        {
+            validez = true;
+
+            System.out.println("Ingrese el rut del trabajador que desea comprobar su actividad:");
+            entrada = scan.nextLine();
+
+            for(short i = 0;i<listaDeTrabajadores.size();i++)
+            {
+                if(listaDeTrabajadores.get(i).getRut().equals(entrada))
+                {
+                    trabajador = listaDeTrabajadores.get(i);
+                    break;
+                }
+                if(i == listaDeTrabajadores.size() - 1)
+                {
+                    validez = false;
+                    System.out.println(mensajeDeError);
+                }
+            }
+        }while(!validez);
+
+        System.out.print("\n" + trabajador.getNombre() + " está " + trabajador.getActividadActual() + "\n\n");
     }
 }
