@@ -523,32 +523,57 @@ public class Empresa
     {
 
         String entrada;
-        boolean validez;
+        boolean validez, visualizando = true;
         String mensajeDeError = "NO VÁLIDO. Intente de nuevo.";
         Trabajador trabajador = null;
 
         do
         {
-            validez = true;
-
-            System.out.println("Ingrese el rut del trabajador que desea comprobar su actividad:");
-            entrada = scan.nextLine();
-
-            for(short i = 0;i<listaDeTrabajadores.size();i++)
+            do
             {
-                if(listaDeTrabajadores.get(i).getRut().equals(entrada))
+                validez = true;
+
+                System.out.println("Ingrese el rut del trabajador que desea comprobar su actividad:");
+                entrada = scan.nextLine();
+
+                for(short i = 0;i<listaDeTrabajadores.size();i++)
                 {
-                    trabajador = listaDeTrabajadores.get(i);
-                    break;
+                    if(listaDeTrabajadores.get(i).getRut().equals(entrada))
+                    {
+                        trabajador = listaDeTrabajadores.get(i);
+                        break;
+                    }
+                    if(i == listaDeTrabajadores.size() - 1)
+                    {
+                        validez = false;
+                        System.out.println(mensajeDeError);
+                    }
                 }
-                if(i == listaDeTrabajadores.size() - 1)
+            }while(!validez);
+
+            System.out.print("\n" + trabajador.getNombre() + " está " + trabajador.getActividadActual() + "\n\n");
+
+            do
+            {
+                validez = true;
+
+                System.out.println("¿Desea ver la actividad de otro trabajador?");
+                System.out.println("1. Sí");
+                System.out.println("2. No");
+                entrada = scan.nextLine();
+
+                if(entrada.equals("2"))
+                {
+                    visualizando = false;
+                }
+                else if(!entrada.equals("1"))
                 {
                     validez = false;
                     System.out.println(mensajeDeError);
                 }
-            }
-        }while(!validez);
+            }while(!validez);
+        }while(visualizando);
 
-        System.out.print("\n" + trabajador.getNombre() + " está " + trabajador.getActividadActual() + "\n\n");
+
     }
 }
