@@ -40,7 +40,7 @@ public class AppVideoJuegos
                 case "5": emp.verTrabajadores();
                           break;
 
-                case "6":
+                case "6": emp.verActividad();
                           break;
 
                 case "7": enUso = false;

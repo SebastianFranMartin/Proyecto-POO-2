@@ -202,7 +202,6 @@ public class Empresa
             {
                 if(rut.equals(listaDeTrabajadores.get(i).getRut()))
                 {
-                    System.out.println("ES FAAALSO");
                     validez = false;
                     break;
                 }
@@ -514,6 +513,8 @@ public class Empresa
 
     public void verActividad()
     {
-
+        /*Trabajador t = listaDeTrabajadores.get(5);
+        System.out.println(t.getClass().getGenericSuperclass().getTypeName());
+        System.out.println(t.getClass().getName());*/
     }
 }
