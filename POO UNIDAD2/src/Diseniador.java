@@ -4,6 +4,6 @@ public class Diseniador extends Trabajador
     {
         super(rut, nombre, sueldo, juego, departamento);
 
-        actividadActual = "Creando sprites del videojuego.";
+        actividadActual = "Creando sprites del videojuego."; //ACCION QUE REALIZARÁ UN DISEÑADOR
     }
 }

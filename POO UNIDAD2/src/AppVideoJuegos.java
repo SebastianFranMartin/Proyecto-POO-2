@@ -1,12 +1,17 @@
+// INTEGRANTES: ÁLVARO VILLALOBOS 20.759.787-2  SEBASTIAN MARTIN 20.731.273-8 FECHA: 30/11/2020
+// ESTE PROGRAMA SE EJECUTA POR CONSOLA INGRESANDO LOS VALORES QUE PIDE EL PROGRAMA. PARA SU EJECUCIÓN SE NECESITAN LAS CLASES: AppVideoJuegos, Empresa, Departamento, Desarrollador,
+// Diseniador, Publicista y Trabajador. EL PROGRAMA DEBERÍA FUNCIONAR CORRECTAMENTE Y LOS ELEMENTOS ENTREGADOS DEBERÍAN SER UNA CARPETA DENTRO DE UN ARCHIVO RAR LLAMADO "AlvaroVillalobosUnidad2" o "SebastianMartinUnidad2"
+// LA FUNCIÓN DE ESTE PROGRAMA ES LA EJECUCIÓN DE UN MENÚ DE OPERACIONES PARA UNA EMPRESA QUE DESEA ALMACCENAR, REVISAR Y CAMBIAR INFORMACIÓN DE SUS TRABAJADORES, TALES COMO SU SUELDO Y EL AUMENTO DE ESTE, TRABAJO, DEPARTAMENTO, ETC.
+// LAS OPCIONES QUE DA EL PROGRAMA AL USUARIO DEBERÁN SER RESPONDIDAS ESCRIBIENDO EL NÚMERO DE LA ACCIÓN QUE USTED DESEE REALIZAR.
 import java.util.Scanner;
 
 public class AppVideoJuegos
 {
     //MAIN
     public static void main(String[] ags) {
-        Empresa emp = new Empresa();
-        Scanner scan = new Scanner(System.in);
-        boolean enUso = true;
+        Empresa emp = new Empresa(); //OBJETO EMPRESA CREADO
+        Scanner scan = new Scanner(System.in); // ELEMENTO ESCANER
+        boolean enUso = true; // BOLEANO QUE PERMITE LA INTERACCIÓN EL EL SWITCH A CONTINUACIÓN
 
         do
         {
@@ -21,7 +26,7 @@ public class AppVideoJuegos
             System.out.println("seleccione una opción escribiendo el número de la operación a realizar");
             String seleccion = scan.nextLine();
 
-            switch(seleccion)
+            switch(seleccion) //DEPENDIENDO DE LA ELECCIÓN DEL USUARIO SE EJECUTARÁ UN MÉTODO QUE SE UBICA EN LA CLASE "Empresa"
             {
                 case "1": emp.crearTrabajador();
                           break;
@@ -41,11 +46,11 @@ public class AppVideoJuegos
                 case "6": emp.verActividad();
                           break;
 
-                case "7": enUso = false;
+                case "7": enUso = false; //PERMITE TERMINAR EL CILCO WHILE Y TERMINAR CON EL EJECUCIÓN DE ESTE PROGRAMA
                           break;
 
                 default:
             }
-        }while(enUso);
+        }while(enUso); //PERMITE QUE EL PROGRAMA SIEMPRE SE ESTÉ EJECUTANDO PARA REALIZAR TODAS LAS OPCIONES QUE EL USUARIO DESEE REALIZAR
     }
 }
